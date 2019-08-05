@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Todos from './components/Todos';
 
+
 export default class App extends Component {
   state = {
     tasks: [
@@ -34,12 +35,40 @@ export default class App extends Component {
   // changeData = () => {
   //   this.setState({ data: 'Alice Zaheer' });
   // }
+
+  // changeData = (a) => {
+  //   this.setState({ isCompleted:  !isCompleted.value });
+  // }
+
+  toggleComplete = (id) => {
+    this.setState({
+      tasks: this.state.tasks.map(task => {
+          if(id === task.id)
+            task.isCompleted = !task.isCompleted
+
+          return task;
+      })
+    })
+  }
+
+  remov = (id)=>{
+this.setState({ tasks: this.state.tasks.filter(elem=> elem.id!==id)  
+})
+  }
+
+  added=()=>{
+
+    
+  }
+
+
   render() {
     const { tasks } = this.state;
+
+
     return (
       <React.Fragment>
-        <h6>App</h6>
-        <Todos tasks={tasks} a={4} />
+        <Todos tasks={tasks} a={4} toggleComplete={this.toggleComplete} remov={this.remov} added={this.added} />
       </React.Fragment >
     );
   }
